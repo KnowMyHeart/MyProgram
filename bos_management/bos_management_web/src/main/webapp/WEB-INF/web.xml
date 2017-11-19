@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>bos_management_web</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+   <!-- 配置随项目启动spring监听器-->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  
+  <!-- 配置spring提供整合Shiro权限框架过滤器
+  		而且配置这个过滤器还需要同名的bean,这个bean必须在xml中注册
+   -->
+  <filter>
+  	<filter-name>ShiroFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>ShiroFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  
+  <!-- 配置struts2的核心过滤器，让struts2在tomcat运行起来 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+  
+ <servlet>
+ 	<servlet-name>cxf</servlet-name>
+ 	<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+ </servlet>
+ 
+ <servlet-mapping>
+ 	<servlet-name>cxf</servlet-name>
+ 	<url-pattern>/webService/*</url-pattern>
+ </servlet-mapping>
+ 
+</web-app>

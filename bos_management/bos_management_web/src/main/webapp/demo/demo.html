@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Complex Layout - jQuery EasyUI Demo</title>
+		<script type="text/javascript" src="./js/jquery-1.8.3.js"></script>
+		<!-- 导入easyui类库 -->
+		<link id="easyuiTheme" rel="stylesheet" type="text/css" href="./js/easyui/themes/default/easyui.css">
+		<link rel="stylesheet" type="text/css" href="./js/easyui/themes/icon.css">
+		<link rel="stylesheet" type="text/css" href="./css/default.css">
+		<script type="text/javascript" src="./js/easyui/jquery.easyui.min.js"></script>
+	</head>
+
+	<body>
+		<div id="cc" class="easyui-layout" data-options="fit:true" style="width:600px;height:400px;">
+			<div data-options="region:'north',title:'North Title',split:true" style="height:120px;"></div>
+			<div data-options="region:'south',title:'South Title',split:true" style="height:100px;"></div>
+			<div data-options="region:'east',iconCls:'icon-reload',title:'East',split:true" style="width:100px;"></div>
+			<div data-options="region:'west',title:'West',split:true" style="width:200px;">
+				<div id="aa" class="easyui-accordion" data-options="fit:true" style="width:300px;height:200px;">
+					<div title="Title1" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">
+						<a id="btn" href="javascript:addTab()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">添加选项卡</a>  
+					</div>
+					<div title="Title2" data-options="iconCls:'icon-reload'" style="padding:10px;">
+						面板2
+					</div>
+					<div title="Title3">
+						面板3
+					</div>
+				</div>
+			</div>
+			<div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
+				<div id="tt" class="easyui-tabs" data-options="fit:'true',border:'false'" style="width:500px;height:250px;">
+					<div title="Tab1" style="padding:20px;display:none;">
+						客户管理
+					</div>
+					<div title="Tab2" data-options="closable:true" style="overflow:auto;padding:20px;display:none;">
+						客户列表
+					</div>
+					<div title="Tab3" data-options="iconCls:'icon-reload',closable:true" style="padding:20px;display:none;">
+						王锐是sb
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		function addTab() {
+			var flag = $('#tt').tabs('exists','New Tab');
+			
+			if(flag){
+				//如果存在就选中
+				$('#tt').tabs('select','New Tab');
+			}else{
+				$('#tt').tabs('add', {
+					title: 'New Tab',
+					content: 'Tab Body',
+					closable: true,
+					tools: [{
+						iconCls: 'icon-mini-refresh',
+						handler: function() {
+							alert('refresh');
+						}
+					}]
+				});
+			}
+			
+		}
+	</script>
+
+</html>

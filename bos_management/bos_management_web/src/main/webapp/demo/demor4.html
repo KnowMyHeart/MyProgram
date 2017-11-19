@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>AJAX添加ztree</title>
+		<script type="text/javascript" src="./js/jquery-1.8.3.js"></script>
+		<!-- 导入ztree库-->
+		<link rel="stylesheet" href="./js/ztree/zTreeStyle.css" type="text/css" />
+		<script src="./js/ztree/jquery.ztree.all-3.5.js" type="text/javascript"></script>
+		<script src="./js/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+	</head>
+	<SCRIPT type="text/javascript">
+		var setting = {
+			data:{
+				simpleData:{
+					enable: true
+				}
+			}
+			
+		};
+			
+		
+		
+		$(function() {
+			var url = "http://127.0.0.1:8020/webapp/data/menu.json" ;
+			$.get(url,function(result){
+				
+				//参数1:将数据附加在哪个节点树上
+				//参数2:树的属性设置
+				//参数3:节点的数据
+				$.fn.zTree.init($("#demoztree"),setting,result);
+			},'json');
+		})
+	</SCRIPT>
+
+	<BODY>
+		<!--
+        	作者：offline
+        	时间：2017-10-30
+        	描述：
+        	
+        	想使用ztree,需要一个ul标签,并且其属性必须有个class为ztree
+        -->
+		<ul id="demoztree" class="ztree"></ul>
+	</BODY>
+
+</html>
